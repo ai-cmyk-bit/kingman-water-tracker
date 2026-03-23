@@ -237,7 +237,6 @@ async function submitStartup(){
   const btn=document.getElementById("save-btn");
   btn.disabled=true;btn.classList.add("saving");btn.textContent="Saving…";
   const p=new URLSearchParams({type:"startup",datetime:dt,well,engine_hours:eng,flow_meter_start:flow,
-    gpm:document.getElementById("f-gpm").value||"",rpm:document.getElementById("f-rpm").value||"",
     blocks:blocks.join(", "),fertigation:document.getElementById("f-fert").checked?"Yes":"No"});
   try{
     await fetch(`${SHEET_URL}?${p}`,{method:"GET",mode:"no-cors"});
