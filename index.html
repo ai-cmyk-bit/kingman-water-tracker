@@ -207,12 +207,6 @@ function renderStartup(){
         <div class="field"><div class="label">Flow meter start</div>
           <input class="input" type="number" step="0.01" placeholder="520.00" id="f-flow-start"></div>
       </div>
-      <div class="grid2">
-        <div class="field"><div class="label"><span>GPM</span><span class="label-opt">optional</span></div>
-          <input class="input" type="number" step="1" placeholder="e.g. 850" id="f-gpm"></div>
-        <div class="field"><div class="label"><span>RPM</span><span class="label-opt">optional</span></div>
-          <input class="input" type="number" step="1" placeholder="e.g. 1750" id="f-rpm"></div>
-      </div>
       <div class="field"><div class="label">Blocks being irrigated</div>
         <div class="block-grid" id="block-grid">${blockBtns()}</div>
         <div class="selected-blocks" id="sel-blocks"></div>
@@ -283,6 +277,11 @@ function renderShutdown(){
         <div class="field"><div class="label"><span>RPM</span><span class="label-opt">optional</span></div>
           <input class="input" type="number" step="1" placeholder="e.g. 1750" id="f-rpm-stop"></div>
       </div>
+      <div class="grid2">
+        <div class="field"><div class="label"><span>PSI</span><span class="label-opt">optional</span></div>
+          <input class="input" type="number" step="1" placeholder="e.g. 60" id="f-psi-stop"></div>
+        <div class="field"></div>
+      </div>
       <div id="err-msg"></div>
       <div class="nav">
         <button class="btn-ghost" onclick="renderHome()">← Back</button>
@@ -300,7 +299,7 @@ async function submitShutdown(){
   const btn=document.getElementById("save-btn");
   btn.disabled=true;btn.classList.add("saving");btn.textContent="Saving…";
   const p=new URLSearchParams({type:"shutdown",datetime:dt,well,flow_meter_end:flow,engine_hours:eng,
-    gpm:document.getElementById("f-gpm-stop").value||"",rpm:document.getElementById("f-rpm-stop").value||""});
+    gpm:document.getElementById("f-gpm-stop").value||"",rpm:document.getElementById("f-rpm-stop").value||"",psi:document.getElementById("f-psi-stop").value||""});
   try{
     await fetch(`${SHEET_URL}?${p}`,{method:"GET",mode:"no-cors"});
     btn.classList.remove("saving");btn.classList.add("saved");btn.textContent="Saved ✓";
